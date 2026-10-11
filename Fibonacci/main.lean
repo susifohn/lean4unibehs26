@@ -1,5 +1,12 @@
 import Mathlib
 
+/-!
+# My Fibonacci project
+
+Lean  expects a module doc-string at the
+beginning of your file.
+-/
+
 set_option linter.style.longLine false
 
 def fib : Nat -> Nat
@@ -47,17 +54,30 @@ theorem fib_non_negative (n : Nat) : fib n >= 0 := by
             -- |- fib n + fib (n+1) >= 0
             omega
 
+-- let's prove the case n=1 by hand
+theorem gr_diff_eq_one :
+    (1 : ℝ) = (goldenRatio - goldenRatioConj) / Real.sqrt 5 := by
+    rw [goldenRatio, goldenRatioConj]
+    rw [eq_div_iff]
+    · ring
+    · positivity -- to show sqrt 5 > 0
 
-theorem Binet_fmla (n : Nat) : (fib n : Real) = (goldenRatio^n - goldenRatioConj^n) / (Real.sqrt 5) := by
-    induction n using Nat.strong_induction_on with
-    | h n ih =>
-        -- ih = ‘∀m < n . ↑(fib m) = (goldenRatio^m - goldenRatioConj^m) / (Real.sqrt 5)’
-        match n with
-        | 0 =>
-            -- goal: ‘(fib 0 : Real) = (goldenRatio^0 - goldenRatioConj^0) / (Real.sqrt 5)’
-            rw [fib]
-            -- goal: ‘(0 : Real) = (goldenRatio^0 - goldenRatioConj^0) / (Real.sqrt 5)’
-            sorry
-        | 1 => sorry
-        | n+2 => sorry
 
+theorem Binet_fmla (n : Nat) :
+    (fib n : ℝ) =
+      (goldenRatio^n - goldenRatioConj^n) / Real.sqrt 5 := by
+
+  induction n using Nat.strong_induction_on with
+
+  | h n ih =>
+
+    match n with
+
+    | 0 =>
+        sorry
+
+    | 1 =>
+        sorry
+
+    | n + 2 =>
+        sorry
