@@ -1,0 +1,28 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\title{Logic Übungsserie 2}
+\author{Christian Kissling}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section*{1a) (i)}
+Schritte
+\begin{enumerate}
+    
+\item $p_1 \leftrightarrow p_2 \sim \neg p_1 \leftrightarrow \neg p_2$
+
+\item $(\neg p_1 \lor p_2) \land (\neg p_2 \lor p_1) \sim (p_1 \lor \neg p_2) \land (p_2 \lor \neg p_1) $
+
+\item $(\neg p_1 \land \neg p_2) \lor (\neg p_1 \land p_1) \lor (p_2 \land \neg p_2) \land (p_2 \land p_1) \sim \\
+(p_1 \land p_2) \lor (p_1 \land \neg p1) \lor (\neg p_2 \land p_2) \lor (\neg p_2 \land \neg p1)  $
+
+
+\item $(\neg p_1 \land \neg p_2) \lor  \bot  \lor \bot \land (p_2 \land p_1) \sim \\
+(p_1 \land p_2) \lor \bot \lor \bot \lor (\neg p_2 \land \neg p1)  $
+\end{enumerate}
+
+
+\end{document}
