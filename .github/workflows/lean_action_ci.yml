@@ -2,7 +2,11 @@ name: Lean Action CI
 
 on:
   push:
+      paths-ignore:
+      - "thesis/**"
   pull_request:
+      paths-ignore:
+      - "thesis/**"
   workflow_dispatch:
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
