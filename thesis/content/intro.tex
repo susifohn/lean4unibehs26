@@ -1,0 +1,86 @@
+
+% --------------------------------------------------------------------------------------------------
+% Kommando Beispiele
+% --------------------------------------------------------------------------------------------------
+
+% Referenz auf z.B. Kapitel
+\chapter{Introduction}
+\label{c:introduction}
+
+%Here how to refer a chapter \ref{c:introduction}...
+
+% Literaturhinweis Reference example \cite{arendt2010henshin}
+
+
+% Theorem Style
+%\begin{definition}\label{def:emc} $e=mc^2$ \end{definition}
+%\begin{lemma} $e=mc^2$ \end{lemma}
+%\begin{proof} $e=mc^2$ \end{proof}
+%\begin{requirement} $e=mc^2$ \end{requirement}
+%\begin{example} $e=mc^2$ \end{example}
+
+% Here how to refer a Definition: In Definition \ref{def:emc}...
+
+% Noch zu Erledigen Hinweis
+% \todo{HERE A TODO!}
+
+% Randnotiz
+%\notiz{SOME NOTE}
+
+% Struktur
+\section{Motivation and Purposen}
+\subsection{SubSection}
+\subsubsection{SubSubSection}
+\paragraph{Pragraph}
+\subparagraph{SubPragraph}
+
+\section{Limitations and AI}
+How AI can help. Input from Podcast SRF. Terence Tao thinks in 3 years more helpful, the other from Lean, thinks in 3 years Math is "solved", like chess, where humans only play a minor role. Lean will soon integrate some AI to guide the Mathematician with the proof.
+
+\subsection{Formalizing Fermat's Last Theorem}
+4.9.2026: Claude worked largely autonomously over 11 days to write the proof in the Lean programming language. \href{https://www.anthropic.com/research/formalizing-fermats-last-theorem}{Link anthropic}
+
+\section{Hello World!}
+As Lean is a pure functional language, printing "Hello World!" to the console isn't pure at all. But as a computer scientist, you can imagine what's next. \\ 
+Installing Lean is stright forward and best using VS Code and the Lean 4 extension form leanpower. Accept installing Elan, the version manager for Lean, as VS Code promts for it. This can take some minutes. Restart VS Code, open a new file and store it with the extenson \texttt{lean}. Now you are ready to eval your first experssion in the lean file and to check the version of lean in the terminal by typing:
+\begin{verbatim}
+    > lean --version
+    Lean (version 4.33.1, ...)
+\end{verbatim}
+
+\section{Concepts}
+
+Several so called \textit{tactics} exist, to prove a theorem:
+\begin{itemize}
+    \item rw - rewrite, substitutions
+    \item ring - algebraic manipulations
+\end{itemize}
+
+You are only allowed to use theorems, if the preconditions are verified too. E.g. using the product rule
+$$ (u,v)' = uv' + u'v$$
+requires to prove the derivability of $u$ and $v$, annoying. Or using 
+$$\sum^{N}_{n=0} = \frac{1}{1-x}$$
+is only allowed if you show $|x|<1$ and $N \geq 0$. \\
+This makes Lean rigorous.Ref https://www.youtube.com/watch?v=bldhmF1Isk4.
+
+\paragraph{Propsitions, Proofs and Types}
+A proposition can be true or false. Like $1+1=2$ or "it's raining tomorrow". We only concern the former ones, the purely mathematical propositions relying only on definitions.\\
+
+A proof on the other hand, is a confirmation or argument, that a proposition is true and is based on 
+\begin{itemize}
+    \item the mathematical definitions and
+    \item logical argumentation.
+\end{itemize}
+
+Mathematicians understand the proof and leave out details. Lean fills in missing steps and checks them mechanically to eliminate possible faults in the proof.\\
+
+Beside functions, also propositions are types. The type of a propositions specifys the evidence that it is true. To prove a proposition, Lean checks those evidences. \textit{In Lean, proving $P$ means constructing a term (or value) of type $P$. Let's look at the following exampele where \texttt{rfl} is a constructor that produces such a term for certain equality propositions}.\\
+
+For the proposition $1+1=2$ the constructor \texttt{rfl} produces a value (term) of type $P$ as the proof of $P$. If the propositon is False, the constructor fails and the proof cannot be constructed.
+
+\begin{verbatim}
+    def foo : 1 + 1 = 2 := rfl  
+\end{verbatim}
+telling \texttt{foo} is of type $1+1=2$, and \texttt{rfl} constructs the proof if the two sides are equal. As Lean can evaluate $1+1$ on the left side, the equality is given. The constructor \texttt{rfl} cannot construct the proposition $1+1=55$. 
+
+

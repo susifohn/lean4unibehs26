@@ -1,0 +1,35 @@
+
+% --------------------------------------------------------------------------------------------------
+% Kommando Beispiele
+% --------------------------------------------------------------------------------------------------
+
+% Referenz auf z.B. Kapitel
+\chapter{Foundations of Proof Assistants}
+\label{c:chapter3}
+
+\section{Systems of Logic}
+
+In classical logic, statements (=Propositions) are either true or false. No test or proof is needed whether a proposition is true or false. E.g. having a proposition $A$ the disjunction $A \lor \neg A$ is always true without showing which side of the disjunction holds. The Law of the Excluded Middle (LEM) holds. \\
+
+On the other side, intuitionistic logic
+rejects the LEM. Claiming $A \lor \neg A$ requires to prove at least one side of the disjunction namely $A$ or $\neg A$.\\
+Proving $\exists \alpha : P(\alpha)$ requires a witness for $\alpha$ and an algorithm (or program) to compute $P(\alpha)$. A theorem in intutioniscit logic implies beeing a theorem in classical logic but not in the opposite directo. in general a tautology in classical logic is not a theorem in intutionistic logic.\\
+
+\textit{Question: Lean 4 seems to base on Intuistic logic and has Proof by contradiction, which is not a constructive proof becaust is can be usd to proof existencewithutproviding an exampleof the obj that is proves existe. \cite{web:intuitionistic_logic}}
+
+Why this matters? Intuitionistic logic requires a constructive proof that an object exists and this construction suits sas an anlgorithm or programm to generate such object.the  Curry-howjard correspondence defines an isomorphism between such programms and proofs. As a consequence, a program in lean 4 or other proof assistants can be used as a proof and vice versa. \cite{web:intuitionistic_logic}
+
+
+\section{Type Theory}
+... type theory and typed $\lambda$ - calculus shall be before the Curry-Howard Correspondence
+
+\section{Curry–Howard Correspondence}
+
+From Wikipedia\\
+
+$$ formula	\iff type $$
+$$proof \iff 	term $$
+$$ \text{formula is true} \iff	\text{type has an element} $$
+
+\section{Why should we thrust Lean 4}
+To trust such a mechanical verification process, it is enough to show that the verification algorithm actually verifies that all formal rules are correctly applied. \cite[Chapter~1.2]{coq_book}

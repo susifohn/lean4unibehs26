@@ -1,0 +1,40 @@
+
+% --------------------------------------------------------------------------------------------------
+% Kommando Beispiele
+% --------------------------------------------------------------------------------------------------
+
+% Referenz auf z.B. Kapitel
+\chapter{Lean 4}
+\label{c:chapter4}
+
+\section{Overview}
+\todo{TODO}
+An example of a theorem in Lean.
+
+\begin{lstlisting}[float=tbh, mathescape=true, captionpos=b, caption=Lean 4, label=mein label, language=lean]
+theorem funext {f₁ f₂ : ∀ (x : α), β x} (h : ∀ x, f₁ x = f₂ x) : f₁ = f₂ := by
+  show extfunApp (Quotient.mk f₁) = extfunApp (Quotient.mk f₂)
+  apply congrArg
+  apply Quotient.sound
+  exact h
+\end{lstlisting}
+
+ 
+
+\section{Basic Language Concepts}
+
+\subsection{Proof by Contradiction}
+
+\begin{lstlisting}[float=tbh, mathescape=true, captionpos=b, caption=Proof by contradiction, label=contradiction, language=lean]
+example (P : Prop) (h : ¬ P → False) : P := by
+  by_contra hP      -- Adds hP : ¬ P to the context, and changes goal to False
+  exact h hP        -- Derives False by applying h to hP
+\end{lstlisting}
+
+
+
+\section{Definitions and Computation}
+
+\section{Proof Construction}
+
+\section{Automation}
