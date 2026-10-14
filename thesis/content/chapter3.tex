@@ -31,5 +31,24 @@ $$ formula	\iff type $$
 $$proof \iff 	term $$
 $$ \text{formula is true} \iff	\text{type has an element} $$
 
+from https://dev.to/shrsv/from-logic-to-code-understanding-the-curry-howard-correspondence-in-lean-1and \\
+the CHc reveals that
+\begin{itemize}
+    \item logical propositions $\iff$ types
+    \item proofs $\iff$ programs 
+    \item proof checking $\iff$ type checking
+\end{itemize}
+As type checking is done by a compiler, a such compler is capable to 
+perform proof checking. \\
+Lets look at an example. $\P \land Q \to P$ tells: if both $P$ and $Q$ 
+are true, then $P$ is true. To do so, one must prove $P$ and $Q$, or 
+similarly provide a proof for both. To prove $P \to Q$ one must
+provide
+\begin{itemize}
+    \item a mapping that transfroms a proof of $P$ to a proof of $Q$
+\end{itemize}
+and this is what functions do. 
+
+
 \section{Why should we thrust Lean 4}
 To trust such a mechanical verification process, it is enough to show that the verification algorithm actually verifies that all formal rules are correctly applied. \cite[Chapter~1.2]{coq_book}
