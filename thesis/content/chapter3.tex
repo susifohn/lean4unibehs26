@@ -22,6 +22,22 @@ Why this matters? Intuitionistic logic requires a constructive proof that an obj
 
 \section{Type Theory}
 ... type theory and typed $\lambda$ - calculus shall be before the Curry-Howard Correspondence
+\subsection{$\lambda$ Calculus}
+Invented by Alonzo Church. He was also a Supervisor of Alain Turing. Church treated functions as black boxes with no
+internal state, means pure functions. On the other side, Turing looked ad functions using the Turing Machine,
+and states are crucial there. [Ref Graham Hutton, ambda Calculus - Computerphile].\\
+
+In the $\lambda$ calculus three things exists: 
+\begin{itemize}
+    \item variables, like $x,y$
+    \item a way of building functions with the $\lambda$ notation
+    \item applying functions, using substitution
+\end{itemize}
+So with this,  we can encode True and False, NOT, AND and any function we want, including recursion. The $\lambda$ 
+calculus and the Turing Machines are aequivalent systems regarding computability. What ever a TM can encode, the 
+$\lambda$ calculus can do it as well and vice versa. This fact is known as the Church--Turing--Correspondence.
+
+
 
 \section{Curry–Howard Correspondence}
 
@@ -40,15 +56,18 @@ the CHc reveals that
 \end{itemize}
 As type checking is done by a compiler, a such compler is capable to 
 perform proof checking. \\
-Lets look at an example. $\P \land Q \to P$ tells: if both $P$ and $Q$ 
+Lets look at an example. $P \land Q \to P$ tells: if both $P$ and $Q$ 
 are true, then $P$ is true. To do so, one must prove $P$ and $Q$, or 
 similarly provide a proof for both. To prove $P \to Q$ one must
 provide
 \begin{itemize}
     \item a mapping that transfroms a proof of $P$ to a proof of $Q$
 \end{itemize}
-and this is what functions do. 
+and this is what functions do.\\
+
+$P \land Q$ can be seen as the Type for a Tuple $(p,q)$ where $p$, $q$ itself are types. 
 
 
 \section{Why should we thrust Lean 4}
-To trust such a mechanical verification process, it is enough to show that the verification algorithm actually verifies that all formal rules are correctly applied. \cite[Chapter~1.2]{coq_book}
+To trust such a mechanical verification process, it is enough to show that the verification algorithm actually 
+verifies that all formal rules are correctly applied. \cite[Chapter~1.2]{coq_book}
