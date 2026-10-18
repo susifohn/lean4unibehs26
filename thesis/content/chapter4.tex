@@ -26,6 +26,7 @@ partial def qsort : List Nat → List Nat
 
 With keyword \texttt{partial} we can postpone the proof of termination
 and evaluate the function
+
 \begin{lstlisting}[float=tbh, mathescape=true, captionpos=b, caption=Lean 4, label=mein label, language=lean]
 #eval qsort [1,3,2] --leading to [1,2,3]
 \end{lstlisting}
