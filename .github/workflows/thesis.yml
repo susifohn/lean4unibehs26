@@ -40,17 +40,18 @@ jobs:
         run: |
           mkdir -p site
           cp thesis/document.pdf site/thesis.pdf
-          cp -r thesis/figures site/figures || true
+          cp -r thesis/html/* site/ || true
+          cp site/document.html site/thesis.html || true
 
-      - name: Convert to HTML (optional)
+      - name: Convert to HTML (TeX4ht)
         if: github.ref == 'refs/heads/main'
         continue-on-error: true
-        working-directory: thesis
-        run: |
-          sudo apt-get update && sudo apt-get install -y pandoc
-          pandoc document.tex -f latex+raw_tex -s --toc --mathjax \
-            --metadata title="Thesis" \
-            -o ../site/thesis.html
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: document.tex
+          working_directory: thesis/
+          compiler: make4ht
+          args: "-u -f html5 -d html"
 
       - name: Create index page
         if: github.ref == 'refs/heads/main'
