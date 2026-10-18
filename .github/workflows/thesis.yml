@@ -32,16 +32,6 @@ jobs:
           root_file: document.tex
           working_directory: thesis/
 
-      # Keep your existing release step(s) here, with
-      #   files: thesis/document.pdf
-
-      - name: Prepare site
-        if: github.ref == 'refs/heads/main'
-        run: |
-          mkdir -p site
-          cp thesis/document.pdf site/thesis.pdf
-          cp -r thesis/html/* site/ || true
-          cp site/document.html site/thesis.html || true
 
       - name: Convert to HTML (TeX4ht)
         if: github.ref == 'refs/heads/main'
@@ -52,6 +42,14 @@ jobs:
           working_directory: thesis/
           compiler: make4ht
           args: "-u -f html5 -d html"
+
+      - name: Prepare site
+        if: github.ref == 'refs/heads/main'
+        run: |
+          mkdir -p site
+          cp thesis/document.pdf site/thesis.pdf
+          cp -r thesis/html/* site/ || true
+          cp site/document.html site/thesis.html || true
 
       - name: Create index page
         if: github.ref == 'refs/heads/main'
