@@ -1,13 +1,51 @@
-
-% --------------------------------------------------------------------------------------------------
-% Kommando Beispiele
-% --------------------------------------------------------------------------------------------------
-
-% Referenz auf z.B. Kapitel
 \chapter{Lean 4}
 \label{c:chapter4}
 
-\section{Overview}
+Some knowledge you should mention:
+\begin{itemize}
+  \item Lean compiles to C
+  \item the build tool is \textt{lake} and allows metaprogramming
+end{itemize}
+
+The main purpose of using Lean these days as proving assistant, but Lean is
+also a functional programming language, where every function must 
+provably terminate. (from claude.applying: because one could prove FALSE with a looping
+function \todo{TODO} HOW?) As a consequence, one has to prove (or convice) Lean that 
+the recursion terminates. This is done by assuring every recursive call is done on a subset 
+of the argument, to make sure the recursive calls will end on a base case and 
+terminate. For illustration, lets look at the quicksort algorihm.
+
+\begin{lstlisting}[float=tbh, mathescape=true, captionpos=b, caption=Lean 4, label=mein label, language=lean]
+partial def qsort : List Nat → List Nat
+  | [] => []
+  | p :: xs =>
+      qsort (xs.filter (fun x => x ≤ p))
+      ++ [p]
+      ++ qsort (xs.filter (fun x => x > p))
+\end{lstlisting}
+
+With keyword \textt{partial} we can postpone the proof of termination
+and evaluate the function
+\begin{lstlisting}[float=tbh, mathescape=true, captionpos=b, caption=Lean 4, label=mein label, language=lean]
+#eval qsort [1,3,2] --leading to [1,2,3]
+\end{lstlisting}
+
+\todo{Haskell has type class Ord, how does Lean handle 
+ordinary types? Do I need for each type a new definition?}
+
+Showing that qsort is a correct sorting algorithm, requires Lean 
+to tell, what this means. Thus we have to prove the result is sorted
+and a permutation of the input list. 
+
+\subsubsection{Lean for proving programs}
+The core principle is, to write program specs as theorems and
+prove them. In the case of the quicksort algorithem something like
+
+\begin{lstlisting}[float=tbh, mathescape=true, captionpos=b, caption=Lean 4, label=mein label, language=lean]
+theorem is_sorted (ns: List Nat) : (qsort ns).Pairwise (\cdot \leq \cdot) := \ldots
+theorem is_permutation \ldots
+\end{lstlisting}
+
 \todo{TODO}
 An example of a theorem in Lean.
 
@@ -36,5 +74,18 @@ example (P : Prop) (h : ¬ P → False) : P := by
 \section{Definitions and Computation}
 
 \section{Proof Construction}
+Lean provides two proof styles
+\begin{itemize}
+  \item Term mode: direct writeing of the term.
+  \item Tactics mode: builds the proof step by step, using tactics:
+  intro, apply, exact, cases, induction, rw, simp, rfl, calc
+\end{itemize}
+
+\todo{what's with tactics for contradiction?}
+
+(claude.ai) Tactics can be arbitrarly clever, but every proof is
+rechecked by a small kernel. 
 
 \section{Automation}
+Linear arithmetic is handles by \textt{omega}. Rewriting using 
+lemmas is with \textt{simp}. \todo{and more}

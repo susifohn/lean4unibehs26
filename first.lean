@@ -54,15 +54,15 @@ theorem filter_length_le (xs : List Nat) (pred : Nat → Bool) :
 -- it seems the problem lean sees, is that the argument of the
 -- recursive call does not get smaller. so length (x:xs) < length xs
 -- has to be proven first to satisfy lean.
-/-
-def qsort1 : List Nat → List Nat
+
+partial def qsort1 : List Nat → List Nat
   | [] => []
   | p :: xs =>
       qsort1 (xs.filter (fun x => x ≤ p))
       ++ [p]
       ++ qsort1 (xs.filter (fun x => x > p))
-termination_by xs => xs.length
--/
+
+#eval qsort1 [1,3,2]
 
 
 -- lists
