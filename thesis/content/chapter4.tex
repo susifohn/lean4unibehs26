@@ -1,5 +1,8 @@
 \chapter{Lean 4}
 \label{c:chapter4}
+\todo{Fragen, auf welche ich eine Antwort wissen sollte}: 1) warum sollten/können wir Lean vertrauen.
+2) auf welchen mathematischen Grundlagen basiert Lean?\\
+
 
 Some knowledge you should mention:
 \begin{itemize}
@@ -7,13 +10,13 @@ Some knowledge you should mention:
   \item the build tool is \texttt{lake} and allows metaprogramming
 \end{itemize}
 
-The main purpose of using Lean these days as proving assistant, but Lean is
+The main purpose of using Lean these days is as proof assistant, but Lean is
 also a functional programming language, where every function must 
-provably terminate. (from claude.applying: because one could prove FALSE with a looping
-function \todo{TODO} HOW?) As a consequence, one has to prove (or convice) Lean that 
+provably terminate. (from claude.ai: because one could prove FALSE with a looping
+function \todo{TODO} HOW?) As a consequence, one has to prove (or convince) Lean that 
 the recursion terminates. This is done by assuring every recursive call is done on a subset 
 of the argument, to make sure the recursive calls will end on a base case and 
-terminate. For illustration, lets look at the quicksort algorihm.
+terminate. For illustration, let's look at the quicksort algorithm.
 
 \begin{lstlisting}[float=tbh, mathescape=true, captionpos=b, caption=Lean 4, label=mein label, language=lean]
 partial def qsort : List Nat → List Nat
@@ -43,7 +46,7 @@ The core principle is, to write program specs as theorems and
 prove them. In the case of the quicksort algorithem something like
 
 \begin{lstlisting}[float=tbh, mathescape=true, captionpos=b, caption=Lean 4, label=mein label, language=lean]
-theorem is_sorted (ns: List Nat) : (qsort ns).Pairwise (\cdot \leq \cdot) := \ldots
+theorem is_sorted (ns: List Nat) : (qsort ns).Pairwise (· ≤ ·) := \ldots
 theorem is_permutation \ldots
 \end{lstlisting}
 
@@ -70,16 +73,16 @@ example (P : Prop) (h : ¬ P → False) : P := by
 \section{Proof Construction}
 Lean provides two proof styles
 \begin{itemize}
-  \item Term mode: direct writeing of the term.
+  \item Term mode: direct writing of the term.
   \item Tactics mode: builds the proof step by step, using tactics:
   intro, apply, exact, cases, induction, rw, simp, rfl, calc
 \end{itemize}
 
 \todo{what's with tactics for contradiction?}
 
-(claude.ai) Tactics can be arbitrarly clever, but every proof is
+(claude.ai) Tactics can be arbitrarily clever, but every proof is
 rechecked by a small kernel. 
 
 \section{Automation}
-Linear arithmetic is handles by \texttt{omega}. Rewriting using 
+Linear arithmetic is handled by \texttt{omega}. Rewriting using 
 lemmas is with \texttt{simp}. \todo{and more}
