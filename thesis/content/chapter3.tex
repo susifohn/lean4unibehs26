@@ -47,9 +47,17 @@ $$
 
 returning $a$ in this case of the identity function.\\
 
-With this simple notation,  we can encode True and False, NOT, AND and any function we want, including recursion and it follows that it is Turing complete. This fact is known as the Church–Turing thesis.\cite{web:lambda_calc}
+With this simple notation,  we can encode True and False, NOT, AND and any function we want, including recursion and it follows that it is Turing complete. This fact is known as the Church–Turing thesis.\cite{web:lambda_calc}\\
 
 
+So far, nothing is known about $x$ and the return value of such function. Therefore  
+
+\subsubsection{The simply typed $lambda$-calculus}
+assigns a type to every expression. Using the notation $(value : Type)$, we have for example
+
+$$(\lambda x.x : \alpha \to \alpha)$$
+or
+$$(\lambda x.\lambda y.y : \alpha \to \beta \to \beta)$$
 
 \section{Curry–Howard Correspondence}
 from claude.ai: A proposition is a type, and a proof is a term of that type. \texttt{Prop} is the universe of 
