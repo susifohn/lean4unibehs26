@@ -16,20 +16,38 @@ Why this matters? Intuitionistic logic requires a constructive proof that an obj
 
 \section{Type Theory}
 ... type theory and typed $\lambda$ - calculus shall be before the Curry-Howard Correspondence
-\subsection{$\lambda$ Calculus}
-Invented by Alonzo Church. He was also a Supervisor of Alan Turing. Church treated functions as black boxes with no
+
+
+\section{$\lambda$ Calculus}
+Invented by Alonzo Church 1933 \todo{add ref}. He was also a Supervisor of Alan Turing. Church treated functions as black boxes with no
 internal state, means pure functions. On the other side, Turing looked at functions using the Turing Machine,
 and states are crucial there. [Ref Graham Hutton, Lambda Calculus - Computerphile].\\
 
 In the $\lambda$ calculus three things exists: 
 \begin{itemize}
-    \item variables, like $x,y$
-    \item a way of building functions with the $\lambda$ notation
-    \item applying functions, using substitution
+    \item Variables, like $x,y$
+    \item Abstraction, a way of building functions
+    \item Application, applying functions to their arguments
 \end{itemize}
-So with this,  we can encode True and False, NOT, AND and any function we want, including recursion. The $\lambda$ 
-calculus and the Turing Machines are equivalent systems regarding computability. Whatever a TM can encode, the 
-$\lambda$ calculus can do it as well and vice versa. This fact is known as the Church–-Turing thesis.
+
+
+The $\lambda$-calculus consists of a precice notation to investigate functions.
+
+
+\[\underbrace{\lambda x.\lambda y}_{\text{arguments}} . \underbrace{b}_{\text{return}}\]
+
+where $b$ defines the function body, telling how the return value is calculated. For example the identity function
+$$\lambda x.x$$
+
+For function application, the input values are appended as follows
+
+$$(
+\lambda x.x) \;a
+$$
+
+returning $a$ in this case of the identity function.\\
+
+With this simple notation,  we can encode True and False, NOT, AND and any function we want, including recursion and it follows that it is Turing complete. This fact is known as the Church–Turing thesis.\cite{web:lambda_calc}
 
 
 
