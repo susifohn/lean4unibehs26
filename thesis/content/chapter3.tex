@@ -24,19 +24,22 @@ internal state, means pure functions. On the other side, Turing looked at functi
 and states are crucial there. [Ref Graham Hutton, Lambda Calculus - Computerphile].\\
 
 In the $\lambda$ calculus three things exists: 
-\begin{itemize}
+\begin{enumerate}
     \item Variables, like $x,y$
     \item Abstraction, a way of building functions
     \item Application, applying functions to their arguments
-\end{itemize}
+\end{enumerate}
 
 
-The $\lambda$-calculus consists of a precice notation to investigate functions.
+The $\lambda$-calculus consists of a precise notation to investigate functions.
 
 
-\[\underbrace{\lambda x.\lambda y}_{\text{arguments}} . \underbrace{b}_{\text{return}}\]
+\[
+\underbrace{\lambda x_1.\lambda x_2}_{\text{arguments}}
+.\underbrace{M}_{\substack{\text{function}\\[2pt]\text{body}}}
+\]
 
-where $b$ defines the function body, telling how the return value is calculated. For example the identity function
+where $x_i$, for $i \in \mathbb{N}_{>0}$ are the function arguments and $M$ is telling how the return value is calculated. For example the identity function
 $$\lambda x.x$$
 
 For function application, the input values are appended as follows
@@ -45,19 +48,68 @@ $$(
 \lambda x.x) \;a
 $$
 
-returning $a$ in this case of the identity function.\\
+returning $a$ in this case. Or in the case of two arguments $x,y$ and two input values $a,b$
+$$
+(\lambda x.\lambda y.M) a \: b
+$$
+
+The three parts of the $\lambda$-calculus variables, abstraction and application can be formulated as a grammar as follows
+\[
+M ::= x \mid \lambda x.M \mid M\,M
+\]
 
 With this simple notation,  we can encode True and False, NOT, AND and any function we want, including recursion and it follows that it is Turing complete. This fact is known as the Church–Turing thesis.\cite{web:lambda_calc}\\
 
 
-So far, nothing is known about $x$ and the return value of such function. Therefore  
+So far, nothing is known about $x$ and the return value of such functions. Therefore  
 
 \subsubsection{The simply typed $lambda$-calculus}
 assigns a type to every expression. Using the notation $(value : Type)$, we have for example
 
-$$(\lambda x.x : \alpha \to \alpha)$$
+$$
+(\lambda x.x : \alpha \to \alpha)
+$$
+
 or
-$$(\lambda x.\lambda y.y : \alpha \to \beta \to \beta)$$
+
+$$
+(\lambda x.\lambda y.y : \alpha \to \beta \to \beta)
+$$
+
+The type $\alpha \to \beta$ is the type of a function taking a value of type $\alpha$ and returning a value of type $\beta$. \\
+
+To infer the type of a valid term, we need rules. Let $\Gamma$ be the list of all assumptions, aka context. $\Gamma,x:\alpha$ denotes the extension of $\Gamma$ with the assumption that $x$ is of type $\alpha$.  The simply typed $\lambda$-calculus provides the following rules for variables, abstraction and application:
+
+\[
+\begin{array}{c}
+\displaystyle
+\frac{x : \alpha \in \Gamma}
+     {\Gamma \vdash x : \alpha}
+\quad\textsc{Var}
+\\[2em]
+\displaystyle
+\frac{\Gamma, x : \alpha \vdash e : \beta}
+     {\Gamma \vdash \lambda x.e : \alpha \to \beta}
+\quad\textsc{Abs}
+\\[2em]
+\displaystyle
+\frac{\Gamma \vdash f : \alpha \to \beta
+      \qquad
+      \Gamma \vdash a : \alpha}
+     {\Gamma \vdash f\,a : \beta}
+\quad\textsc{App}
+\end{array}
+\]
+
+What can we do so far using this rules. Well, let's find the type of the id function.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.7\textwidth]{figures/type_of_id.png}
+  \caption{Ref: Lean for Scientists and Engineers, Summer 2024 - Lecture 1}
+  \label{fig:model}
+\end{figure}
+
 
 \section{Curry–Howard Correspondence}
 from claude.ai: A proposition is a type, and a proof is a term of that type. \texttt{Prop} is the universe of 
