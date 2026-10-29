@@ -1,0 +1,20 @@
+\chapter{Notation and Abbreviations}
+
+% --- definitions ---
+\newacronym{nd}{ND}{Natural Deduction}
+\newacronym{ch}{CH}{Curry--Howard Correspondence}
+\newacronym{lj}{LJ}{Gentzen's intuitionistic sequent calculus}
+
+\newglossaryentry{derivation}{
+  name={derivation},
+  description={finite tree of rule applications ending in a conclusion}
+}
+\newglossaryentry{judgement}{
+  name={judgement},
+  description={statement of the form $\Gamma \vdash A$}
+}
+
+% --- output ---
+\glsaddall   % optional: list all entries, even uncited ones
+\printglossary[type=\acronymtype, title={List of Abbreviations}]
+\printglossary[title={Definitions}]
