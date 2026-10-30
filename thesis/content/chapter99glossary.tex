@@ -1,33 +1,29 @@
 \chapter*{Notation and Abbreviations}
 \addcontentsline{toc}{chapter}{Notation and Abbreviations}
 
-% ---------------------------------------------------------
-% ABBREVIATIONS      \abk[sortkey]{short}{long}
-% (sortkey is optional; use it to control the order)
-% ---------------------------------------------------------
-\abk{ND}{Natural Deduction}
-\abk{CH}{Curry--Howard Correspondence}
-\abk{LJ}{Gentzen's intuitionistic sequent calculus}
-\abk{LK}{Gentzen's classical sequent calculus}
-% \abk{...}{...}      % <- add your own here
+\section*{Abbreviations}
+\renewcommand{\arraystretch}{1.3}
+\begin{longtable}{@{}p{0.2\textwidth}p{0.75\textwidth}@{}}
+  \textbf{ND}  & Natural Deduction \\
+  \textbf{CH}  & Curry--Howard Correspondence \\
+  \textbf{LJ}  & Gentzen's intuitionistic sequent calculus \\
+  \textbf{LK}  & Gentzen's classical sequent calculus \\
+  % \textbf{...} & ... \\    % <- add your own here
+\end{longtable}
 
-% ---------------------------------------------------------
-% SYMBOLS            sortkey with "z" puts them after the abbreviations
-% ---------------------------------------------------------
-\abk[z1]{$\Gamma$}{context (set of assumptions)}
-\abk[z2]{$\Gamma \vdash A$}{judgement: $A$ is derivable from $\Gamma$}
-\abk[z3]{$\subst{A}{t}{x}$}{substitution of $t$ for $x$ in $A$}
-% \abk[z4]{$...$}{...}  % <- add your own here
+\section*{Symbols}
+\begin{longtable}{@{}p{0.2\textwidth}p{0.75\textwidth}@{}}
+  $\Gamma$             & context (set of assumptions) \\
+  $\Gamma \vdash A$    & judgement: $A$ is derivable from $\Gamma$ \\
+  $A[t/x]$             & substitution of $t$ for $x$ in $A$ \\
+  $A \to B$            & implication / function type \\
+  % $...$              & ... \\   % <- add your own here
+\end{longtable}
 
-\printnomenclature
-
-% ---------------------------------------------------------
-% DEFINITIONS
-% ---------------------------------------------------------
 \section*{Definitions}
-\begin{description}
-  \item[Derivation] finite tree of rule applications ending in a conclusion.
-  \item[Judgement] statement of the form $\Gamma \vdash A$.
-  \item[Deduction] reasoning from premises to a conclusion.
-  % \item[Term] explanation.   % <- add your own here
-\end{description}
+\begin{longtable}{@{}p{0.2\textwidth}p{0.75\textwidth}@{}}
+  \textbf{Derivation}  & finite tree of rule applications ending in a conclusion. \\
+  \textbf{Judgement}   & statement of the form $\Gamma \vdash A$. \\
+  \textbf{Deduction}   & reasoning from premises to a conclusion. \\
+  % \textbf{...}       & ... \\   % <- add your own here
+\end{longtable}
