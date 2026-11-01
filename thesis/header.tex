@@ -157,9 +157,16 @@
 % Seiten Layout Einstellungen
 % -----------------------------------------
 
-% Paket zur einfacheren Manipulation von Kopf- und Fußzeile
+% Paket zur Manipulation von Kopf- und Fußzeilen
 \usepackage{scrlayer-scrpage}
-\pagestyle{fancy}
+
+\clearpairofpagestyles
+\pagestyle{scrheadings}
+
+\automark[section]{chapter}
+\ohead{\pagemark}
+\ihead{\headmark}
+
 %\pagestyle{empty}
 
 % Seitenabmessungen
