@@ -213,4 +213,10 @@ provides allocator hardening for Lean versions 4.31.0 and later.
 \paragraph{How do I validate a Lean proof}
 ref: \href{https://lean-lang.org/faq/#validation}{FAQ}.
 
-The answer to that question depends on your threat model: Did you write the proof yourself, or someone you trust, or someone who is trying to trick you. More detailed guidance on what a Lean proof can be found in the section “Validating a Lean Proof” of the Lean Reference Manual.
+The answer to that question depends on your threat model: Did you write the proof yourself, or someone you trust, or someone who is trying to trick you or AI-generated proofs or programs. Ref: \href{https://lean-lang.org/doc/reference/latest/find/?domain=Verso.Genre.Manual.section&name=validating-proofs}{FAQ}
+
+Furthermore it is important to distinguish the question does the theorem have a valid proof from “what does the theorem statement mean. 
+
+Let's look at our quicksort algorithm \ref{qsort_validation}. If one forgets to specify any sorting algorithm is a permutation of the input list, we get a proof for the isSorted criteris only, what is not sufficent for quicksort. Lean can not help here.  
+
+
