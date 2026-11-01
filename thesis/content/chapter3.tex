@@ -3,11 +3,12 @@
 
 \section{Systems of Logic}
 
-In classical logic, statements (=Propositions) are either true or false. No test or proof is needed whether a proposition is true or false. E.g. having a proposition $A$ the disjunction $A \lor \neg A$ is always true without showing which side of the disjunction holds. The Law of the Excluded Middle (LEM) holds. \\
+In classical logic, statements (=Propositions) are either true or false. No test or proof is needed whether a proposition is true or false. E.g. having a proposition $A$ the disjunction $A \lor \neg A$ is always true without showing which side of the disjunction holds. The Law of the Excluded Middle (LEM) holds.
 
 On the other side, intuitionistic logic
-rejects the LEM. Claiming $A \lor \neg A$ requires to prove at least one side of the disjunction namely $A$ or $\neg A$.\\
-Proving $\exists \alpha : P(\alpha)$ requires a witness for $\alpha$ and an algorithm (or program) to compute $P(\alpha)$. A theorem in intuitionistic logic implies being a theorem in classical logic but not in the opposite direction. In general a tautology in classical logic is not a theorem in intutionistic logic.\\
+rejects the LEM. Claiming $A \lor \neg A$ requires to prove at least one side of the disjunction namely $A$ or $\neg A$.
+
+Proving $\exists \alpha : P(\alpha)$ requires a witness for $\alpha$ and an algorithm (or program) to compute $P(\alpha)$. A theorem in intuitionistic logic implies being a theorem in classical logic but not in the opposite direction. In general a tautology in classical logic is not a theorem in intutionistic logic.
 
 \textit{Question: Lean 4 seems to base on Intuitionistic logic and has Proof by contradiction, which is not a constructive proof because it can be used to prove existence without providing an example of the object that is proved to existe. \cite{web:intuitionistic_logic}}
 
@@ -21,7 +22,7 @@ Why this matters? Intuitionistic logic requires a constructive proof that an obj
 \section{$\lambda$ Calculus}
 Invented by Alonzo Church 1933 \todo{add ref}. He was also a Supervisor of Alan Turing. Church treated functions as black boxes with no
 internal state, means pure functions. On the other side, Turing looked at functions using the Turing Machine,
-and states are crucial there. [Ref Graham Hutton, Lambda Calculus - Computerphile].\\
+and states are crucial there. [Ref Graham Hutton, Lambda Calculus - Computerphile].
 
 In the $\lambda$ calculus three things exists: 
 \begin{enumerate}
@@ -58,7 +59,7 @@ The three parts of the $\lambda$-calculus variables, abstraction and application
 M ::= x \mid \lambda x.M \mid M\,M
 \]
 
-With this simple notation,  we can encode True and False, NOT, AND and any function we want, including recursion and it follows that it is Turing complete. This fact is known as the Church–Turing thesis.\cite{web:lambda_calc}\\
+With this simple notation,  we can encode True and False, NOT, AND and any function we want, including recursion and it follows that it is Turing complete. This fact is known as the Church–Turing thesis.\cite{web:lambda_calc}
 
 
 So far, nothing is known about $x$ and the return value of such functions. Therefore  
@@ -76,7 +77,7 @@ $$
 (\lambda x.\lambda y.y : \alpha \to \beta \to \beta)
 $$
 
-The type $\alpha \to \beta$ is the type of a function taking a value of type $\alpha$ and returning a value of type $\beta$. \\
+The type $\alpha \to \beta$ is the type of a function taking a value of type $\alpha$ and returning a value of type $\beta$. 
 
 To infer the type of a valid term, we need rules. Let $\Gamma$ be the list of all assumptions, aka context. $\Gamma,x:\alpha$ denotes the extension of $\Gamma$ with the assumption that $x$ is of type $\alpha$.  The simply typed $\lambda$-calculus provides the following rules for variables, abstraction and application:
 
@@ -107,21 +108,21 @@ What can we do so far using this rules. Well, let's find the type of the id func
   \centering
   \includegraphics[width=0.7\textwidth]{figures/type_of_id.png}
   \caption{Derive the type of the identity function}
-  \label{fig:model}
 \end{figure}
 
 
 \section{Curry–Howard Correspondence}
 from claude.ai: A proposition is a type, and a proof is a term of that type. \texttt{Prop} is the universe of 
-propositions, and proofs are erased at runtime.\\
+propositions, and proofs are erased at runtime.
 
-From Wikipedia\\
+From Wikipedia
 
 $$ formula	\iff type $$
 $$proof \iff 	term $$
 $$ \text{formula is true} \iff	\text{type has an element} $$
 
-from https://dev.to/shrsv/from-logic-to-code-understanding-the-curry-howard-correspondence-in-lean-1and \\
+from \href{https://dev.to/shrsv/from-logic-to-code-understanding-the-curry-howard-correspondence-in-lean-1and}{link} 
+
 the CHc reveals that
 \begin{itemize}
     \item logical propositions $\iff$ types
@@ -130,7 +131,8 @@ the CHc reveals that
 \end{itemize}
 
 As type checking is done by a compiler, such a compler is capable to 
-perform proof checking. \\
+perform proof checking. 
+
 Let's look at an example. $P \land Q \to P$ tells: if both $P$ and $Q$ 
 are true, then $P$ is true. To do so, one must prove $P$ and $Q$, or 
 similarly provide a proof for both. To prove $P \to Q$ one must
@@ -140,21 +142,21 @@ provide
     \item a mapping that transforms a proof of $P$ to a proof of $Q$
 \end{itemize}
 
-and this is what functions do.\\
+and this is what functions do.
 
 $P \land Q$ can be seen as the Type for a Tuple $(p,q)$ where $p$, $q$ itself are types. 
 
 
-from Guillermo: CH correspondence from there point to Typed Lambda Calculus and also IPC.\\
+from Guillermo: CH correspondence from there point to Typed Lambda Calculus and also IPC.
 
 
 \section{Why should we trust Lean 4}
 To trust such a mechanical verification process, it is enough to show that the verification algorithm actually 
-verifies that all formal rules are correctly applied. \cite[Chapter~1.2]{coq_book}\\
+verifies that all formal rules are correctly applied. \cite[Chapter~1.2]{coq_book}
 
-On the lean home page \cite{web:lean_homepage} the following is stated: \textit{ Lean's minimal trusted kernel guarantees absolute correctness in mathematical proof, software and hardware verification.}\\
+On the lean home page \cite{web:lean_homepage} the following is stated: \textit{ Lean's minimal trusted kernel guarantees absolute correctness in mathematical proof, software and hardware verification.}
 
-What does this mean now?\\
+What does this mean now?
 
 Ref: lean FAQ.
 What is the Trusted Code Base of Lean?
@@ -209,5 +211,6 @@ verified and unverified code. In this context, see also the
 provides allocator hardening for Lean versions 4.31.0 and later.
 
 \paragraph{How do I validate a Lean proof}
-ref: \href{https://lean-lang.org/faq/#validation}{FAQ}.\\
+ref: \href{https://lean-lang.org/faq/#validation}{FAQ}.
+
 The answer to that question depends on your threat model: Did you write the proof yourself, or someone you trust, or someone who is trying to trick you. More detailed guidance on what a Lean proof can be found in the section “Validating a Lean Proof” of the Lean Reference Manual.
