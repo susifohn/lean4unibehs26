@@ -8,3 +8,30 @@
 \label{c:chapter6}
 
 Here the next chapter \ref{c:chapter6}...
+
+\subsection{Is Lean Just Like Rocq?}
+
+Ref: https://lean-lang.org/faq/#rocq. 
+On a foundational level, Lean and \href{https://rocq-prover.org/}{Rocq} 
+(the theorem prover formerly known as Coq) have much in common: both 
+are based on dependent type theory (the Calculus of Inductive 
+Constructions), with some technical differences:
+
+\begin{itemize}
+    \item Lean uses definitional proof irrelevance.
+    \item Lean uses a non-cumulative hierarchy of universes, while 
+    Rocq uses a cumulative hierarchy.
+    \item Rocq's basic theory supports recursion, and its kernel has 
+    a trusted termination checker, whereas Lean's basic theory only 
+    provides recursors, and the handling of recursion is not part 
+    of the trusted code base.
+\end{itemize}
+
+On top of these similar foundations, however, the systems are 
+engineered rather differently. Lean's most important design goals 
+are scalability, automation, and a focus on classical logic. Lean 
+is also known for its excellent metaprogramming framework, in which 
+Lean itself is used for metaprogramming and extensibility. Lean is 
+also written in Lean, and many users have written their own 
+extensions. Furthermore, Lean provides a rich and modern user 
+interface.
