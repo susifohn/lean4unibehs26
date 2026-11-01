@@ -180,7 +180,8 @@
 \ohead{\pagemark}
 
 % Kopfzeile auf Kapitelanfangsseiten
-\renewcommand{\chapterpagestyle}{scrheadings}
+%\renewcommand{\chapterpagestyle}{scrheadings}
+\renewcommand{\chapterpagestyle}{plain}
 
 % Seitenstil für normale Seiten
 \newpairofpagestyles{normal}{
@@ -190,7 +191,7 @@
 }
 
 % Seitenstil für Kapitelanfangsseiten
-\newpairofpagestyles{plain}{
+\renewpairofpagestyles{plain}{
   \clearpairofpagestyles
   \cfoot{\pagemark}
 }
