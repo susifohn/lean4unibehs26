@@ -154,4 +154,56 @@ verifies that all formal rules are correctly applied. \cite[Chapter~1.2]{coq_boo
 
 On the lean home page \cite{web:lean_homepage} the following is stated: \textit{ Lean's minimal trusted kernel guarantees absolute correctness in mathematical proof, software and hardware verification.}\\
 
-What does this mean now?
+What does this mean now?\\
+
+Ref: https://lean-lang.org/faq/#tcb
+\paragraph{What is the Trusted Code Base of Lean?}
+
+One of Lean's core design approaches is that \textbf{one does not 
+need to trust Lean's implementation} in order to trust the proofs 
+it produces. Proofs can be verified using independent checkers, 
+as described in more detail in the section 
+\href{https://lean-lang.org/doc/reference/latest/find/?domain=Verso.Genre.Manual.section\&name=validating-proofs}
+{``Validating a Lean Proof''} of the Lean Reference Manual.
+
+Thus, it is sufficient to trust the soundness of the checker used 
+to validate the proof output. This basis of trust, i.e., the 
+source code of the checker(s) being used, is commonly referred 
+to as the \textit{Trusted Code Base (TCB)}. Multiple independent 
+checkers can be employed to further increase confidence.
+
+Relying on independent checkers as the TCB covers many of Lean's 
+core applications, particularly those in which the proof itself 
+is the main product:
+
+\begin{itemize}
+    \item Mathematical theorems.
+    \item Verification of existing algorithms, protocols, or hardware.
+    \item Verification of software written in other programming 
+    languages and transformed into Lean statements using tools 
+    such as \href{https://github.com/AeneasVerif/aeneas}{Aeneas}.
+    The tool in question may introduce additional assumptions 
+    concerning how the Lean statements relate to the original 
+    software. These assumptions consequently become part of the TCB.
+\end{itemize}
+
+An extended use case of Lean, which also entails an extended TCB, 
+arises from combining Lean's roles as a theorem prover and as a 
+programming language. Examples include:
+
+\begin{itemize}
+    \item Executing verified Lean code as native binaries.
+    \item Using the \texttt{native\_decide} tactic, which is tracked 
+    as an additional axiom for transparency.
+\end{itemize}
+
+In these cases, the TCB is extended to include the Lean compiler 
+(written in Lean), the Lean runtime (written in C++), and the 
+code-generation backend (LLVM by default), as well as any other 
+external code linked into the program.
+
+Standard hardening techniques can be employed to increase 
+confidence in these components, particularly when combining 
+verified and unverified code. In this context, see also the 
+\texttt{LEAN\_MI\_SECURE} CMake configuration option, which 
+provides allocator hardening for Lean versions 4.31.0 and later.
