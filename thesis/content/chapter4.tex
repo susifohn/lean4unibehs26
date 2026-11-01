@@ -1,7 +1,7 @@
 \chapter{Lean 4}
 \label{c:chapter4}
 \todo{Fragen, auf welche ich eine Antwort wissen sollte}: 1) warum sollten/können wir Lean vertrauen.
-2) auf welchen mathematischen Grundlagen basiert Lean?3) wie sind die Natürlichen zahlen definiert\\
+2) auf welchen mathematischen Grundlagen basiert Lean?3) wie sind die Natürlichen zahlen definiert
 
 
 Some knowledge you should mention:
@@ -18,8 +18,8 @@ the recursion terminates. This is done by assuring every recursive call is done 
 of the argument, to make sure the recursive calls will end on a base case and 
 terminate. For illustration, let's look at the quicksort algorithm.
 
-\begin{lstlisting}[float=tbh, mathescape=true, captionpos=b, caption=Lean 4, label=mein label, language=lean]
-partial def qsort : List Nat → List Nat
+\begin{lstlisting}[float=tbh, mathescape=true, captionpos=b, caption=Lean 4, label=gamma, language=lean]
+partial def qsort : List Nat -> List Nat
   | [] => []
   | p :: xs =>
       qsort (xs.filter (fun x => x ≤ p))
@@ -30,7 +30,7 @@ partial def qsort : List Nat → List Nat
 With keyword \texttt{partial} we can postpone the proof of termination
 and evaluate the function
 
-\begin{lstlisting}[float=tbh, mathescape=true, captionpos=b, caption=Lean 4, label=mein label, language=lean]
+\begin{lstlisting}[float=tbh, mathescape=true, captionpos=b, caption=Lean 4, label=alpha, language=lean]
 #eval qsort [1,3,2] --leading to [1,2,3]
 \end{lstlisting}
 
@@ -45,9 +45,11 @@ and a permutation of the input list.
 The core principle is, to write program specs as theorems and
 prove them. In the case of the quicksort algorithem something like
 
-\begin{lstlisting}[float=tbh, mathescape=true, captionpos=b, caption=Lean 4, label=mein label, language=lean]
-theorem is_sorted (ns: List Nat) : (qsort ns).Pairwise (· ≤ ·) := \ldots
-theorem is_permutation \ldots
+\begin{lstlisting}[float=tbh, mathescape=true, captionpos=b, caption=Lean 4, label=beta, language=lean]
+theorem 
+is_sorted (ns: List Nat) : (qsort ns).Pairwise (· ≤ ·) :=...
+theorem 
+is_permutation ...
 \end{lstlisting}
 
 \todo{TODO}
@@ -61,9 +63,9 @@ An example of a theorem in Lean.
 \subsection{Proof by Contradiction}
 
 \begin{lstlisting}[float=tbh, mathescape=true, captionpos=b, caption=Proof by contradiction, label=contradiction, language=lean]
-example (P : Prop) (h : ¬ P → False) : P := by
-  by_contra hP      -- Adds hP : ¬ P to the context, and changes goal to False
-  exact h hP        -- Derives False by applying h to hP
+example (P : Prop) (h : ¬ P -> False) : P := by
+  by_contra hP 
+  exact h hP        
 \end{lstlisting}
 
 
