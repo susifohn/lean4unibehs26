@@ -119,7 +119,7 @@
 \widowpenalty = 10000	% Hurenkind
 
 % Zeilenumbruch bei Bildbeschreibungen
-\setcapindent{1em}
+\captionsetup{indent=1em}
 
 % Link Farben innerhalb des Dokuments
 \hypersetup{
@@ -157,103 +157,91 @@
 % Seiten Layout Einstellungen
 % -----------------------------------------
 
-% Paket zur Manipulation von Kopf- und Fußzeilen
-\usepackage{scrlayer-scrpage}
+% Kopf- und Fußzeilen mit KOMA-Script
+\usepackage[automark,headsepline]{scrlayer-scrpage}
 
 \clearpairofpagestyles
 \pagestyle{scrheadings}
 
-\automark[section]{chapter}
-\ohead{\pagemark}
-\ihead{\headmark}
-
-%\pagestyle{empty}
-
-% Seitenabmessungen
+% Seitenlayout
 \setlength{\topmargin}{0pt}
 \setlength{\voffset}{0cm}
-\setlength{\textheight}{20.5 cm}
-%\setlength{\headsep}{0.7cm}
+\setlength{\textheight}{20.5cm}
 \setlength{\evensidemargin}{1.15cm}
 \setlength{\oddsidemargin}{0.2cm}
 \setlength{\textwidth}{14.7cm}
-\setlength{\headwidth}{14.7cm}
 \setlength{\skip\footins}{15mm}
-%\setlength{\footskip}{2cm}
 
-% Kapitel Anzeige im Header
-\renewcommand{\chaptermark}[1]{\markboth{\MakeUppercase{\thechapter\ #1}}{}}
+% Kapitel- und Abschnittsmarkierungen
+\automark[section]{chapter}
 
-% Kopf- und Fusszeilen formatieren
-\fancypagestyle{normal}{
-  \fancyhf{}
-  \renewcommand\headrulewidth{0.4pt}
-  \fancyhead[RE]{\leftmark}
-  \fancyhead[LO]{\rightmark}
-  \fancyhead[RO,LE]{\thepage}
+% Kopfzeile
+\ihead{\headmark}
+\ohead{\pagemark}
+
+% Kopfzeile auf Kapitelanfangsseiten
+\renewcommand{\chapterpagestyle}{scrheadings}
+
+% Seitenstil für normale Seiten
+\newpairofpagestyles{normal}{
+  \ihead{\headmark}
+  \ohead{\pagemark}
+  \setheadsepline{0.4pt}
 }
 
-% Anfang eines neuen Kapitels etc.
-\fancypagestyle{plain}{
-  \renewcommand\headrulewidth{0.0pt}
-  \fancyhf{}
-  \fancyfoot[CO]{\thepage}
+% Seitenstil für Kapitelanfangsseiten
+\newpairofpagestyles{plain}{
+  \clearpairofpagestyles
+  \cfoot{\pagemark}
 }
 
-% Header für das Inhaltsverzeichnis
-\fancypagestyle{ihv}{
-  \fancyhf{}
-  \renewcommand\headrulewidth{0.4pt}
-  \fancyhead[RE,LO]{CONTENTS}
-  \fancyhead[RO,LE]{\thepage}
+% Seitenstil für Inhaltsverzeichnis
+\newpairofpagestyles{ihv}{
+  \ihead{CONTENTS}
+  \ohead{\pagemark}
+  \setheadsepline{0.4pt}
 }
 
-% Header für das Abkürzungsverzeichnis
-\fancypagestyle{akv}{
-  \fancyhf{}
-  \renewcommand\headrulewidth{0.4pt}
-  \fancyhead[RE,LO]{LIST OF ABBREVIATIONS}
-  \fancyhead[RO,LE]{\thepage}
+% Seitenstil für Abkürzungsverzeichnis
+\newpairofpagestyles{akv}{
+  \ihead{LIST OF ABBREVIATIONS}
+  \ohead{\pagemark}
+  \setheadsepline{0.4pt}
 }
 
-% Header für den Anhang
-\fancypagestyle{app}{
-  \fancyhf{}
-  \renewcommand\headrulewidth{0.4pt}
-  \fancyhead[RE,LO]{APPENDIX}
-  \fancyhead[RO,LE]{\thepage}
+% Seitenstil für Anhang
+\newpairofpagestyles{app}{
+  \ihead{APPENDIX}
+  \ohead{\pagemark}
+  \setheadsepline{0.4pt}
 }
 
-% Header für das Abbildungsverzeichnis
-\fancypagestyle{abv}{
-  \fancyhf{}
-  \renewcommand\headrulewidth{0.4pt}
-  \fancyhead[RE,LO]{LIST OF FIGURES}
-  \fancyhead[RO,LE]{\thepage}
+% Seitenstil für Abbildungsverzeichnis
+\newpairofpagestyles{abv}{
+  \ihead{LIST OF FIGURES}
+  \ohead{\pagemark}
+  \setheadsepline{0.4pt}
 }
 
-% Header für das Literaturverzeichnis
-\fancypagestyle{bib}{
-  \fancyhf{}
-  \renewcommand\headrulewidth{0.4pt}
-  \fancyhead[RE,LO]{BIBLIOGRAPHY}
-  \fancyhead[RO,LE]{\thepage}
+% Seitenstil für Literaturverzeichnis
+\newpairofpagestyles{bib}{
+  \ihead{BIBLIOGRAPHY}
+  \ohead{\pagemark}
+  \setheadsepline{0.4pt}
 }
 
-% Header für den Index
-\fancypagestyle{swv}{
-  \fancyhf{}
-  \renewcommand\headrulewidth{0.4pt}
-  \fancyhead[RE,LO]{INDEX}
-  \fancyhead[RO,LE]{\thepage}
+% Seitenstil für Index
+\newpairofpagestyles{swv}{
+  \ihead{INDEX}
+  \ohead{\pagemark}
+  \setheadsepline{0.4pt}
 }
 
-% Header für Listings
-\fancypagestyle{lst}{
-  \fancyhf{}
-  \renewcommand\headrulewidth{0.4pt}
-  \fancyhead[RE,LO]{LISTINGS}
-  \fancyhead[RO,LE]{\thepage}
+% Seitenstil für Listings
+\newpairofpagestyles{lst}{
+  \ihead{LISTINGS}
+  \ohead{\pagemark}
+  \setheadsepline{0.4pt}
 }
 
 % -------------------------------------------
@@ -337,7 +325,7 @@
   extendedchars=true,
   backgroundcolor=\color{CodeBackground},
   breaklines=true,
-  breakatwhitespace=true
+  breakatwhitespace=true,
   tabsize=3
 }
 
