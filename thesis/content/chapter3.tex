@@ -1,25 +1,62 @@
 \chapter{Foundations of Proof Assistants}
 \label{c:chapter3}
 
-\section{Systems of Logic}
+\section{Introduction}
+\todo{similar to the preface of the Book}
 
+\subsection{Some historical background}
+
+The foundation of today's proof assistants, such as Rcoq and Lean 4, is built from several mathematical branches and it took decades before anyone saw its correspondence.
+
+Arround 1920 Brouwer's intuitionism requires the presence of an constuctable evidence for any mathematical statement to be true. In 1930 Heyting gave the first axiomatisation of intuitionistic logic also known as constructive logic, where the law of excluded middle holds. Heyting and Kolmogorov then gave few years later an informal interpretation, treating proofs as constructions of evidences, known as the BHK-interpretation, explained in \ref{s:bhk_interpretation}.
+
+Gentzen developed 1935 natural deduction for intuitionistic logic, see \ref{s:intuitionistic_logic}, to formalize mathematical reasoning.
+
+In the same time, Church worked on the $\lambda$-calculus and Curry observed the first hint for the Curry-Howard-Correspondence, that types match axioms of implcational logic. A few years later Church extended to the simply typed $\lambda$-calculus.
+
+Howard writes 1969  “The formulae-as-types notion of construction”, showing that Gentzen's natural deduction corresponds to the simply typed $lambda$-calculus. This is the date given for the correspondence itself. 
+
+Years later in 1980 Howard showed the correspondence extends to the logical connectives $\land$ and $lor$ by extending the lambda calculus with pairs and disjoint sums. \cite{wadler2015propositions}
+
+
+
+
+
+
+
+
+\section{Logical systems}
+To make precise when a statement follows from other statements, a logical system is needed. The syntax defines how to construct well formed formulas. The semantics assigns meanings to formulas and determines when a formula is true or false in the system. In classical logic by truth valuations and in intuitionistic logic by Kripke models for example.  
+
+\subsection{Classical propositional logic}
 In classical logic, statements (=Propositions) are either true or false. No test or proof is needed whether a proposition is true or false. E.g. having a proposition $A$ the disjunction $A \lor \neg A$ is always true without showing which side of the disjunction holds. The Law of the Excluded Middle (LEM) holds.
 
-On the other side, intuitionistic logic
+\subsection{Intuitionistic propositional logic}
+On the other side, intuitionistic logic IPC
 rejects the LEM. Claiming $A \lor \neg A$ requires to prove at least one side of the disjunction namely $A$ or $\neg A$.
 
-Proving $\exists \alpha : P(\alpha)$ requires a witness for $\alpha$ and an algorithm (or program) to compute $P(\alpha)$. A theorem in intuitionistic logic implies being a theorem in classical logic but not in the opposite direction. In general a tautology in classical logic is not a theorem in intutionistic logic.
+Proving $\exists \alpha : P(\alpha)$ requires a witness for $\alpha$ and an algorithm (or program) to compute $P(\alpha)$. A theorem in intuitionistic logic implies being a theorem in classical logic but not in the opposite direction. In general a tautology in classical logic is not a theorem in intuitionistic logic.
 
-\textit{Question: Lean 4 seems to base on Intuitionistic logic and has Proof by contradiction, which is not a constructive proof because it can be used to prove existence without providing an example of the object that is proved to existe. \cite{web:intuitionistic_logic}}
+This matters because intuitionistic logic requires a constructive proof that an object exists and this construction suits as an algorithm or program to generate such object. The  Curry-Howard correspondence defines an isomorphism between such programs and proofs. As a consequence, a program in lean 4 or other proof assistants can be used as a proof and vice versa. \cite{web:intuitionistic_logic}
 
-Why this matters? Intuitionistic logic requires a constructive proof that an object exists and this construction suits as an anlgorithm or program to generate such object. The  Curry-Howard correspondence defines an isomorphism between such programs and proofs. As a consequence, a program in lean 4 or other proof assistants can be used as a proof and vice versa. \cite{web:intuitionistic_logic}
+\subsection{The BHK interpretation of IPC}
+\label{s:bhk_interpretation}
+A proof of $A \to B$ is a method that transforms any proof of $A$ into a proof of $B$, and a proof of $A \wedge B$ is a pair of proofs. This reading already treats proofs as constructions, and so as something close to programs, although it was never made formal.
+
+\section{Proof systems}
+
+What is a proof system?
+\subsection{Hilbert-style systems for IPC}
 
 
-\section{Type Theory}
-... type theory and typed $\lambda$ - calculus shall be before the Curry-Howard Correspondence
+\subsection{Natural deduction for IPC}
+\label{s:intuitionistic_logic}
+
+Natural deduction NJ was meant to mirror actual mathematical reasoning, and each connective comes with introduction and elimination rules. Gentzen’s Hauptsatz (cut elimination) showed that proofs can be normalized by removing detours. Prawitz (1965) later developed the corresponding normalization theory for natural deduction. For this chapter, the important point is that proof normalization is a computational process.
 
 
-\section{\texorpdfstring{The type $\lambda$}{The type lambda}}
+
+\section{\texorpdfstring{The $\lambda$-calculus}{The lambda-calculus}}
 Invented by Alonzo Church 1933 \todo{add ref}. He was also a Supervisor of Alan Turing. Church treated functions as black boxes with no
 internal state, means pure functions. On the other side, Turing looked at functions using the Turing Machine,
 and states are crucial there. [Ref Graham Hutton, Lambda Calculus - Computerphile].
@@ -64,7 +101,7 @@ With this simple notation,  we can encode True and False, NOT, AND and any funct
 
 So far, nothing is known about $x$ and the return value of such functions. Therefore  
 
-\subsubsection{The simply typed $lambda$-calculus}
+\section{\texorpdfstring{The simply typed $\lambda$-calculus}{The simply typed lambda-calculus}}
 assigns a type to every expression. Using the notation $(value : Type)$, we have for example
 
 $$
@@ -111,7 +148,7 @@ What can we do so far using this rules. Well, let's find the type of the id func
 \end{figure}
 
 
-\section{Curry–Howard Correspondence}
+\section{The Curry–Howard Correspondence}
 from claude.ai: A proposition is a type, and a proof is a term of that type. \texttt{Prop} is the universe of 
 propositions, and proofs are erased at runtime.
 
@@ -145,78 +182,5 @@ provide
 and this is what functions do.
 
 $P \land Q$ can be seen as the Type for a Tuple $(p,q)$ where $p$, $q$ itself are types. 
-
-
-from Guillermo: CH correspondence from there point to Typed Lambda Calculus and also IPC.
-
-
-\section{Why should we trust Lean 4}
-To trust such a mechanical verification process, it is enough to show that the verification algorithm actually 
-verifies that all formal rules are correctly applied. \cite[Chapter~1.2]{coq_book}
-
-On the lean home page \cite{web:lean_homepage} the following is stated: \textit{ Lean's minimal trusted kernel guarantees absolute correctness in mathematical proof, software and hardware verification.}
-
-What does this mean now?
-
-Ref: lean FAQ.
-What is the Trusted Code Base of Lean?
-
-One of Lean's core design approaches is that \textbf{one does not 
-need to trust Lean's implementation} in order to trust the proofs 
-it produces. Proofs can be verified using independent checkers, 
-as described in more detail in the section 
-\href{https://lean-lang.org/doc/reference/latest/find/?domain=Verso.Genre.Manual.section\&name=validating-proofs}
-{``Validating a Lean Proof''} of the Lean Reference Manual.
-
-Thus, it is sufficient to trust the soundness of the checker used 
-to validate the proof output. This basis of trust, i.e., the 
-source code of the checker(s) being used, is commonly referred 
-to as the \textit{Trusted Code Base (TCB)}. Multiple independent 
-checkers can be employed to further increase confidence.
-
-Relying on independent checkers as the TCB covers many of Lean's 
-core applications, particularly those in which the proof itself 
-is the main product:
-
-\begin{itemize}
-    \item Mathematical theorems.
-    \item Verification of existing algorithms, protocols, or hardware.
-    \item Verification of software written in other programming 
-    languages and transformed into Lean statements using tools 
-    such as \href{https://github.com/AeneasVerif/aeneas}{Aeneas}.
-    The tool in question may introduce additional assumptions 
-    concerning how the Lean statements relate to the original 
-    software. These assumptions consequently become part of the TCB.
-\end{itemize}
-
-An extended use case of Lean, which also entails an extended TCB, 
-arises from combining Lean's roles as a theorem prover and as a 
-programming language. Examples include:
-
-\begin{itemize}
-    \item Executing verified Lean code as native binaries.
-    \item Using the \texttt{native\_decide} tactic, which is tracked 
-    as an additional axiom for transparency.
-\end{itemize}
-
-In these cases, the TCB is extended to include the Lean compiler 
-(written in Lean), the Lean runtime (written in C++), and the 
-code-generation backend (LLVM by default), as well as any other 
-external code linked into the program.
-
-Standard hardening techniques can be employed to increase 
-confidence in these components, particularly when combining 
-verified and unverified code. In this context, see also the 
-\texttt{LEAN\_MI\_SECURE} CMake configuration option, which 
-provides allocator hardening for Lean versions 4.31.0 and later.
-
-\paragraph{How do I validate a Lean proof}
-ref: \href{https://lean-lang.org/faq/#validation}{FAQ}.
-
-The answer to that question depends on your threat model: Did you write the proof yourself, or someone you trust, or someone who is trying to trick you or AI-generated proofs or programs. Ref: \href{https://lean-lang.org/doc/reference/latest/find/?domain=Verso.Genre.Manual.section&name=validating-proofs}{FAQ}
-
-Furthermore it is important to distinguish the question does the theorem have a valid proof from “what does the theorem statement mean. 
-
-Let's look at our quicksort algorithm \ref{qsort_validation}. If one forgets to specify any sorting algorithm is a permutation of the input list, we get a proof for the isSorted criteris only, what is not sufficent for quicksort. Lean can not help here.  
 
 
